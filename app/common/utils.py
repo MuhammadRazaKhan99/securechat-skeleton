@@ -1,9 +1,18 @@
-"""Helper signatures: now_ms, b64e, b64d, sha256_hex."""
+# app/common/utils.py
+import base64, hashlib, time, os
+from typing import Tuple
 
-def now_ms(): raise NotImplementedError
+def b64(x: bytes) -> str:
+    return base64.b64encode(x).decode()
 
-def b64e(b: bytes): raise NotImplementedError
+def ub64(s: str) -> bytes:
+    return base64.b64decode(s)
 
-def b64d(s: str): raise NotImplementedError
+def now_ms() -> int:
+    return int(time.time() * 1000)
 
-def sha256_hex(data: bytes): raise NotImplementedError
+def sha256_hex(b: bytes) -> str:
+    return hashlib.sha256(b).hexdigest()
+
+def random_bytes(n: int) -> bytes:
+    return os.urandom(n)
